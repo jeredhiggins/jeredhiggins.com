@@ -15,7 +15,7 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  BUILD_PATH: "."
+  BUILD_PATH: "dist"
 
 jobs:
   build:
@@ -24,23 +24,25 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
-      - name: Setup Node
+      - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
-          cache: "npm"
-
+          node-version: 20
       - name: Install dependencies
         run: npm ci
-
       - name: Build with Astro
         run: npm run build
+      - name: Ensure CNAME file exists
+        run: echo "jeredhiggins.com" > dist/CNAME
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
 
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
       - name: Deploy to GitHub Pages
-        run: |
-          git config --global user.name 'github-actions[bot]'
-          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add dist -f
-          git commit -m 'Deploy to GitHub Pages'
-          git push origin `git subtree split --prefix dist main`:gh-pages --force
+        uses: actions/deploy-pages@v4

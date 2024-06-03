@@ -1,0 +1,44 @@
+---
+import { SEO } from 'astro-seo';
+
+interface Props {
+    title?: string;
+    description?: string;
+    ogImage?: string;
+}
+const {
+    title,
+    description = 'Technical SEO with 15+ years experience. I make Python 🐍 SEO Tools and offer technical SEO services/consulting.',
+    ogImage = 'https://jeredhiggins.com/og.png',
+} = Astro.props as Props;
+const twitterHandle = '@JeredHiggins';
+---
+
+<SEO
+    title={title ? `${title} | Jered Higgins` : 'Jered Higgins - SEO, writer, artist, smooth computer operator'}
+    description={description}
+    openGraph={{
+        basic: {
+            title: 'Jered Higgins',
+            type: 'website',
+            image: ogImage,
+        },
+    }}
+    twitter={{
+        creator: twitterHandle,
+        card: 'summary_large_image',
+        site: twitterHandle,
+        title: 'JeredHiggins',
+        description,
+        image: ogImage,
+        imageAlt: 'JeredHiggins',
+    }}
+    extend={{
+        link: [
+            {
+                rel: 'sitemap',
+                href: '/sitemap-index.xml',
+            },
+        ],
+    }}
+/>

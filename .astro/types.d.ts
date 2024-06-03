@@ -135,18 +135,125 @@ declare module 'astro:content' {
 	>;
 
 	type ContentEntryMap = {
-		
+		"consulting": {
+"custom-development-design.mdx": {
+	id: "custom-development-design.mdx";
+  slug: "custom-development-design";
+  body: string;
+  collection: "consulting";
+  data: InferEntrySchema<"consulting">
+} & { render(): Render[".mdx"] };
+"error-troubleshooting-audits.mdx": {
+	id: "error-troubleshooting-audits.mdx";
+  slug: "error-troubleshooting-audits";
+  body: string;
+  collection: "consulting";
+  data: InferEntrySchema<"consulting">
+} & { render(): Render[".mdx"] };
+"machine-learning-ai.mdx": {
+	id: "machine-learning-ai.mdx";
+  slug: "machine-learning-ai";
+  body: string;
+  collection: "consulting";
+  data: InferEntrySchema<"consulting">
+} & { render(): Render[".mdx"] };
+"page-speed-core-web-vitals-performance.mdx": {
+	id: "page-speed-core-web-vitals-performance.mdx";
+  slug: "page-speed-core-web-vitals-performance";
+  body: string;
+  collection: "consulting";
+  data: InferEntrySchema<"consulting">
+} & { render(): Render[".mdx"] };
+"reporting-analysis.mdx": {
+	id: "reporting-analysis.mdx";
+  slug: "reporting-analysis";
+  body: string;
+  collection: "consulting";
+  data: InferEntrySchema<"consulting">
+} & { render(): Render[".mdx"] };
+"seo-data-pipelines-apis.mdx": {
+	id: "seo-data-pipelines-apis.mdx";
+  slug: "seo-data-piplines-apis";
+  body: string;
+  collection: "consulting";
+  data: InferEntrySchema<"consulting">
+} & { render(): Render[".mdx"] };
+"seo-tools-code.mdx": {
+	id: "seo-tools-code.mdx";
+  slug: "seo-tools-code";
+  body: string;
+  collection: "consulting";
+  data: InferEntrySchema<"consulting">
+} & { render(): Render[".mdx"] };
+"seo-training.mdx": {
+	id: "seo-training.mdx";
+  slug: "seo-training";
+  body: string;
+  collection: "consulting";
+  data: InferEntrySchema<"consulting">
+} & { render(): Render[".mdx"] };
+"site-taxonomy-architecture.mdx": {
+	id: "site-taxonomy-architecture.mdx";
+  slug: "site-taxonomy-architecture";
+  body: string;
+  collection: "consulting";
+  data: InferEntrySchema<"consulting">
+} & { render(): Render[".mdx"] };
+"web-strategy.mdx": {
+	id: "web-strategy.mdx";
+  slug: "web-strategy";
+  body: string;
+  collection: "consulting";
+  data: InferEntrySchema<"consulting">
+} & { render(): Render[".mdx"] };
+"website-launch.mdx": {
+	id: "website-launch.mdx";
+  slug: "website-launch";
+  body: string;
+  collection: "consulting";
+  data: InferEntrySchema<"consulting">
+} & { render(): Render[".mdx"] };
+"website-migration.mdx": {
+	id: "website-migration.mdx";
+  slug: "website-migration";
+  body: string;
+  collection: "consulting";
+  data: InferEntrySchema<"consulting">
+} & { render(): Render[".mdx"] };
+};
+"posts": {
+"email-obfuscation.mdx": {
+	id: "email-obfuscation.mdx";
+  slug: "email-obfuscation";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".mdx"] };
+"random-noise-audio-jammer.mdx": {
+	id: "random-noise-audio-jammer.mdx";
+  slug: "random-noise-audio-jammer";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".mdx"] };
+"useful-seo-scripts.mdx": {
+	id: "useful-seo-scripts.mdx";
+  slug: "useful-seo-scripts";
+  body: string;
+  collection: "posts";
+  data: InferEntrySchema<"posts">
+} & { render(): Render[".mdx"] };
+};
+
 	};
 
 	type DataEntryMap = {
 		"images": {
-};
-"posts": {
 };
 
 	};
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	export type ContentConfig = never;
+	export type ContentConfig = typeof import("../src/content/config.js");
 }

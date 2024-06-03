@@ -1,0 +1,76 @@
+---
+title: Build a Portable Random Noise Audio Jammer for Less than $50
+slug: random-noise-audio-jammer
+description: Make an affordable and portable random noise generator for counter-surveillance and privacy
+date: 2024-05-19
+image: ../../images/posts/audio_jammer.webp
+---
+
+import { components as MDXComponents } from '../../components/mdxComponents';
+export const components = MDXComponents;
+import { Image } from 'astro:assets';
+import postImage from '../../assets/images/posts/audio_jammer.webp';
+import postImage2 from '../../assets/images/posts/circuit.webp';
+import postImage3 from '../../assets/images/posts/schematic.webp';
+
+## Example:
+<Image src={postImage} alt="Audio Jammer" format="webp" />
+
+## Purpose and Background:
+Make an affordable and portable random noise generator for counter-surveillance/privacy
+With the increasing amount of new surveillance systems, wide use of surveillance devices/software, and lack of tools/resources/education on privacy issues - why not try to maintain some amount of privacy?
+
+## Resources:
+- [EFF Tools](https://www.eff.org/pages/tools)
+- [EFF Security Education](https://sec.eff.org/)
+
+### Supplies:
+- Arduino UNO $22.00
+- 9V Battery $4.00
+- 9V Battery Snap Connector $4.00
+- Jumper Wires $2.00
+- 8 ohm speaker $2.00
+- Photoresistor $1.00
+- 4.7K ohm resistor $0.75
+- 100 ohm resistor $0.50
+- Half-size solderless breadboard $5.00
+- Assortment of Lego bricks $4.00
+    - Total Cost: $45.25
+
+### Software:
+- [Arduino IDE](https://www.arduino.cc/en/Main/Software)
+
+### Circuit/Schematic:
+
+#### Circuit:
+<Image src={postImage2} alt="Audio Jammer Circuit" format="webp" />
+
+#### Schematic:
+<Image src={postImage3} alt="Audio Jammer Schematic" format="webp" />
+
+
+
+### Code:
+I used some example code in public domain with a small tweak to generate a tone out that relies on the sensor reading. Adjust the settings to find a sound that isn't too annoying. See code and instructions below:
+
+```c++
+int outputPin = 9;
+
+void setup() 
+{
+  // initialize serial communications (for debugging only):
+  Serial.begin(9600);
+}
+
+void loop() {
+  // read the sensor:
+  int sensorReading = analogRead(A0);
+  // map the analog input range (400 - 1000 from the photoresistor)
+  // to the output pitch range (120 - 1500Hz)
+  int thisPitch = map(sensorReading, 400, 1000, 120, 1500);
+  // play the pitch:
+  tone(outputPin, thisPitch, 10);
+  // delay in between reads for stability
+  delay(1);        
+}
+```

@@ -1,0 +1,108 @@
+---
+title: Code - Email Obfuscation with JS
+slug: email-obfuscation
+description: Email Obfuscation with JS because I don't want to pay for a seperate service 🤑
+date: 2024-05-21
+image: ../../images/posts/email_obfuscation.webp
+---
+
+import { components as MDXComponents } from '../../components/mdxComponents';
+export const components = MDXComponents;
+
+
+I created this React component for my site because I'm stubborn and didn't want to use an email service.
+The code defines a React component named `EmailRevealButton` that creates a button on a webpage. 
+When a user clicks this button, it reveals a partially hidden email address with a small delay added as an extra step. 
+There is also a simple character shift function that takes the original email address and encodes it by shifting each character's ASCII code by 1.
+It is then decoded only after the click event and 1 second delay.
+
+---
+
+### Security Note:
+
+    > This method is an obfuscation technique and not a foolproof security measure. Determined scrapers can still decode the email if they analyze the JavaScript. For better security, consider an email service.
+
+```js
+import { useEffect } from 'react';
+
+const EmailRevealButton = () => {
+  useEffect(() => {
+    const button = document.getElementById('reveal-email-button');
+    if (button) {
+      button.addEventListener('click', handleClick);
+      return () => button.removeEventListener('click', handleClick);
+    }
+  }, []);
+
+  const handleClick = (event) => {
+    const button = event.currentTarget;
+    const encodedEmail = button.getAttribute('data-email');
+    if (encodedEmail) {
+      const decodedEmail = decodeEmail(encodedEmail);
+      setTimeout(() => {
+        button.textContent = decodedEmail;
+      }, 1000); // 1 second delay
+    }
+  };
+
+  const encodeEmail = (email) => {
+    let encoded = '';
+    for (let i = 0; i < email.length; i++) {
+      encoded += String.fromCharCode(email.charCodeAt(i) + 1);
+    }
+    return encoded;
+  };
+
+  const decodeEmail = (encodedEmail) => {
+    let decoded = '';
+    for (let i = 0; i < encodedEmail.length; i++) {
+      decoded += String.fromCharCode(encodedEmail.charCodeAt(i) - 1);
+    }
+    return decoded;
+  };
+
+  const email = 'example@gmail.com'; // Replace with your email address
+  const encodedEmail = encodeEmail(email);
+
+  return (
+    <button className="mt-1 text-green-700 dark:text-green-300 reveal-email" id="reveal-email-button" data-email={encodedEmail}>
+      Click to 👀
+    </button>
+  );
+};
+
+export default EmailRevealButton;
+```
+
+## Benefits of Using This Code:
+
+- The email address is not directly visible in the HTML source, which can help protect it from being harvested by spambots.
+- The email is encoded using a simple character shift method, making it less likely to be easily extracted by basic scraping techniques.
+- The email is revealed only when the user clicks the button——also making it more difficult to be scraped.
+- The 1-second delay before revealing the email also potentialy helps obfuscate the email more as most spambots are not patient.
+- The use of React and its hooks (useEffect) ensures that the event listeners are properly managed, preventing potential memory leaks.
+- The encoding and decoding logic is encapsulated within the component, making the code modular and easy to maintain.
+- The email address can be easily changed by updating the email variable.
+- The encoding method can be enhanced for stronger obfuscation if needed.
+
+
+## Example Usage:
+When integrated into a React application, this component can be used to display a partially hidden email address 
+that gets revealed upon user interaction:
+
+```js
+import React from 'react';
+import ReactDOM from 'react-dom';
+import EmailRevealButton from './EmailRevealButton'; // Assuming the component is saved in EmailRevealButton.js
+
+const App = () => (
+  <div>
+    <h1>Contact Us</h1>
+    <p>For more information, please contact us at:</p>
+    <EmailRevealButton />
+  </div>
+);
+
+ReactDOM.render(<App />, document.getElementById('root'));
+```
+

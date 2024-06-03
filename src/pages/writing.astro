@@ -1,0 +1,36 @@
+---
+import { getCollection } from 'astro:content';
+import MainLayout from '../layouts/MainLayout.astro';
+import BlogPostWithSearch from '../components/BlogPostWithSearch';
+
+const allBlogPosts = await getCollection('posts');
+const sortedPosts = allBlogPosts.sort(
+    (a, b) => Number(new Date(b.data.date)) - Number(new Date(a.data.date))
+);
+
+---
+
+<MainLayout title='Writing / Code'>
+    <div
+        class='flex flex-col items-start justify-center max-w-2xl mx-auto mb-16'
+    >
+        <h1
+            class='mb-4 text-3xl font-bold tracking-tight text-purple-500 dark:text-purple-400 md:text-5xl
+            transition:name='heading'
+        >
+            Writing/Code
+        </h1>
+        <p class='mb-4 text-gray-600 dark:text-gray-400'>
+            {
+                `I write about technical SEO, data science/analytics, Python, JS, SQL, science fiction, Raspberry Pi and Arduino projects, video games, and more.` 
+            }
+            <div class="py-8">
+            <details>
+                <summary class='text-orange-700 dark:text-orange-300'>Total Posts</summary>
+                    <p class='mt-1 text-green-700 dark:text-green-300  text-l pl-4'>{sortedPosts.length}</p>
+            </details>
+            </div>
+        </p>
+        <BlogPostWithSearch client:only='react' sortedPosts={sortedPosts} />
+    </div>
+</MainLayout>

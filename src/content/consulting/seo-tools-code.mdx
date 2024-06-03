@@ -1,0 +1,86 @@
+---
+title: SEO Tools & Code
+slug: seo-tools-code
+description: SEO Tools, Python Scripts, and Automation
+image: ../images/consulting/seo_tools_code.webp
+---
+
+import { components as MDXComponents } from '../../components/mdxComponents';
+export const components = MDXComponents;
+
+## Code 
+I am most experienced with Python but also know RegEx SQL, R, Google Apps Script, MicroPython, CircuitPython, and C++. 
+To see some more examples and useful SEO scripts, check out some of my
+<a href='/writing'>posts</a>
+
+
+## Python SEO Tool Development Services:
+
+1. **Custom Script Development**: Developing custom Python scripts that can automate
+repetitive SEO tasks, such as data scraping, content analysis, or link building.
+
+- e.g. Python script to combine all csv files into a dataframe and then save the
+combined dataframe as a new csv file
+```python
+import os
+import pandas as pd
+
+# Path to the directory containing CSV files
+directory = '/example/'
+
+# List all CSV files in the directory
+csv_files = [file for file in os.listdir(directory) if file.endswith('.csv')]
+
+# Initialize an empty list to store individual DataFrames
+dfs = []
+
+# Loop through each CSV file and read data into individual DataFrames
+for file in csv_files:
+    file_path = os.path.join(directory, file)
+    
+    # Read CSV file without specifying data types initially
+    df = pd.read_csv(file_path)
+    
+    # Append DataFrame to the list
+    dfs.append(df)
+
+# Check if all DataFrames have the same column names
+if all(df.columns.tolist() == dfs[0].columns.tolist() for df in dfs):
+    # Concatenate all DataFrames in the list
+    combined_data = pd.concat(dfs, ignore_index=True)
+    
+    # Check if the columns exist in the combined DataFrame
+    missing_columns = [col for col in dtype_mapping.keys() if col not in combined_data.columns]
+    
+    if not missing_columns:
+        # Specify data types for columns to avoid DtypeWarning
+        dtype_mapping = {
+            'Full URL': str,
+            'PageType': str,
+            'HTTP Status Code': pd.Int64Dtype(),  # Use pd.Int64Dtype() for nullable integers
+            'Source Full URL': str,
+            'Source PageType': str,
+            'Inlinks - Anchor Text': str,
+            'Inlinks - Link Main Position': pd.Int64Dtype(),
+            'Inlinks - Link Main Position Type': str
+        }
+
+        # Convert columns to specified data types
+        combined_data = combined_data.astype(dtype_mapping)
+
+        # Handle n/a fields by replacing with NaN
+        combined_data.replace(['n/a', 'N/A', 'NA', 'NaN'], pd.NA, inplace=True)
+
+        # Save the combined data to a new CSV file
+        combined_data.to_csv('/example/combined_data.csv', index=False)
+    else:
+        print(f"Columns {', '.join(missing_columns)} not found in the combined DataFrame.")
+else:
+    print("Column names in the CSV files are not consistent. Please check and try again.")
+    ```
+
+
+2. **SEO Data Scraping**: Building Python scripts that can scrape SEO-related data from
+various sources, such as search engines, social media platforms, or online directories.
+2. **Data Import/Export**: Developing Python tools that can import and export data from
+various sources, such as CSV files, Excel sheets, or databases.

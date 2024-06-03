@@ -1,0 +1,358 @@
+---
+title: Machine Learning, Deep Learning, NLP, LLM's & AI
+slug: machine-learning-ai
+description: Machine Learning, Deep Learning, NLP, LLM's & AI
+image: ../images/consulting/machine_learning_ai.webp
+---
+
+import { components as MDXComponents } from '../../components/mdxComponents';
+export const components = MDXComponents;
+
+## Machine Learning & NLP SEO Services:
+
+1. **Keyword Extraction**: Extracting relevant keywords from large datasets using machine
+learning algorithms such as models like BERT (Bidirectional Encoder Representations from
+Transformers), RoBERTa (Robustly Optimized BERT Pretraining Approach), or XLNet (Extreme
+Large-scale Neural network Language model)
+
+```python
+from transformers import BertTokenizer, BertModel
+import torch
+
+# Load pre-trained BERT model and tokenizer
+model_name = 'bert-base-uncased'
+tokenizer = BertTokenizer.from_pretrained(model_name)
+model = BertModel.from_pretrained(model_name)
+
+# Example text data
+text = "Keyword extraction is the task of identifying important words or phrases from text."
+
+# Tokenize the text
+inputs = tokenizer(text, return_tensors='pt')
+outputs = model(**inputs)
+
+# Extract the embeddings for each token
+token_embeddings = outputs.last_hidden_state[0]
+
+# Convert to numpy array for further processing
+token_embeddings = token_embeddings.detach().numpy()
+
+# Print token embeddings
+for token, embedding in zip(tokenizer.tokenize(text), token_embeddings):
+    print(f"Token: {token}, Embedding: {embedding[:5]}...")  # Display first 5 elements for brevity
+```
+```bash
+Token: key, Embedding: [-0.3300163  -0.39773816 -0.7331577  -0.16246746 -0.35335115]...
+Token: ##word, Embedding: [-0.32510367 -0.211187   -0.4033796  -0.12039164  0.29958674]...
+Token: extraction, Embedding: [-0.6109904  -0.04703491 -0.05116182 -0.31660753  0.75384265]...
+Token: is, Embedding: [-0.5650322   0.2509209  -0.49352887 -0.20091213  0.71768343]...
+Token: the, Embedding: [-0.08126638  0.19776767 -0.41648164 -0.28400514  0.21632487]...
+Token: task, Embedding: [-0.10088038 -0.1992302  -0.4438328  -0.00524061  0.06786112]...
+Token: of, Embedding: [ 0.1734445  -0.08642493 -0.6627809  -0.30654463  0.11002157]...
+Token: identifying, Embedding: [-0.7350841   0.19656911 -0.894021    0.00897935  0.3540546 ]...
+Token: important, Embedding: [-0.48176876  0.2694786   0.21553569 -0.4727178   0.5036165 ]...
+Token: words, Embedding: [-0.5259429   0.272185   -0.3521507  -0.5490284   0.14939153]...
+Token: or, Embedding: [ 0.1445177   0.9307165   0.03141395 -0.43853498  0.2388922 ]...
+Token: phrases, Embedding: [ 0.9836977   0.48321965  0.6874629  -0.0049537   0.6204151 ]...
+Token: from, Embedding: [ 0.8563778   0.14313772 -0.32211912 -0.11594377 -0.15347044]...
+Token: text, Embedding: [ 0.40585446  0.30699936  0.02127423 -0.00826865  0.63988954]...
+Token: ., Embedding: [ 0.408903    0.6881197  -0.11956017 -0.43798736  0.2487345 ]...
+
+```
+
+
+
+2. **Topic Modeling**: Identifying underlying topics or themes in a dataset using topic
+modeling techniques like Probabilistic Latent Semantic Analysis (pLSA): An extension of LSA that incorporates
+probabilistic reasoning to improve topic coherence.
+3. **Topic Modeling with Deep Learning**: Using deep learning architectures to model the underlying
+topics in text data such as Deep Topic Model, Variational Autoencoder, or Neural Topic Model.
+4. **Sentiment Analysis**: Analyzing text data to determine the sentiment or emotional tone
+of the content using machine learning models such as Naive Bayes classifier.
+5. **Entity Extraction**: Extracting entities such as names, locations, and organizations
+from unstructured text data using NLP and machine learning techniques such as Stanford CoreNLP's Named Entity Recognition (NER) module.
+6. **Classification Modeling**: Building classification models to categorize text data into
+predefined categories using machine learning algorithms such as Support Vector Machines (SVMs).
+```python
+import pandas as pd
+from sklearn.feature_extraction.text import TfidfVectorizer
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score, classification_report
+
+# Example dataset
+data = {
+    'text': ["This is a positive comment", "This is a negative comment", "This is another positive comment", "This is another negative comment"],
+    'label': [1, 0, 1, 0]
+}
+
+df = pd.DataFrame(data)
+X = df['text']
+y = df['label']
+
+# Convert text data to TF-IDF features
+vectorizer = TfidfVectorizer()
+X_tfidf = vectorizer.fit_transform(X)
+
+# Split the dataset
+X_train, X_test, y_train, y_test = train_test_split(X_tfidf, y, test_size=0.2, random_state=42)
+
+# Create and train the SVM model
+model = SVC()
+model.fit(X_train, y_train)
+
+# Predict and evaluate
+y_pred = model.predict(X_test)
+print(f"Accuracy: {accuracy_score(y_test, y_pred)}")
+print(f"Classification Report:\n{classification_report(y_test, y_pred)}")
+
+# Predict category for a new text
+new_text = ["This is a new positive comment"]
+new_text_tfidf = vectorizer.transform(new_text)
+predicted_label = model.predict(new_text_tfidf)
+print(f"Predicted Label: {predicted_label[0]}")
+```
+```bash
+Accuracy: 0.0
+Classification Report:
+              precision    recall  f1-score   support
+
+           0       0.00      0.00      0.00       1.0
+           1       0.00      0.00      0.00       0.0
+
+    accuracy                           0.00       1.0
+   macro avg       0.00      0.00      0.00       1.0
+weighted avg       0.00      0.00      0.00       1.0
+
+Predicted Label: 1
+```
+
+
+7. **Text Classification**: Classifying text into predefined keywords/topics/sentiments/segments/etc.
+    - Latent Semantic Analysis (LSA): Latent Semantic Analysis (LSA) breaks down complex text documents into smaller parts, each
+highlighting a unique perspective on the original meaning. By doing so, LSA distills the
+data into a concise representation of underlying concepts or themes, making it easier to
+understand and analyze.
+    - Latent Dirichlet Allocation (LDA): Latent Dirichlet Allocation (LDA) is a mathematical model that represents complex texts as
+combinations of underlying themes or topics. Each topic is defined by its unique set of
+words and their frequencies, allowing for a deeper understanding of the text's meaning and
+structure.
+    - Non-negative Matrix Factorization (NMF): Non-negative Matrix Factorization (NMF) takes a matrix of word frequencies in a corpus and
+breaks it down into two smaller matrices that represent different topics. These topics can
+then be combined to generate new and more informative representations of the text.
+8. **Named Entity Recognition (NER)**: Identifying named entities such as people, places,
+and organizations in unstructured text data.
+9. **Tokenization**: Tokenization helps identify the most common words and phrases in your content. By analyzing
+these frequencies, you can refine your content to incorporate relevant keywords that match
+your audience's search habits.
+10. **Search Query Prediction**: Use machine learning models like recurrent neural networks
+(RNNs) or long short-term memory (LSTM) networks to predict future search queries based on
+historical data, trends, and patterns.
+
+```python
+import numpy as np
+import tensorflow as tf
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import LSTM, Dense, Embedding
+
+# Example historical data (extended list of queries)
+queries = [
+    "how to cook pasta",
+    "best pasta recipes",
+    "pasta cooking tips",
+    "easy pasta dishes",
+    "how to bake bread",
+    "best bread recipes",
+    "bread baking tips",
+    "easy bread recipes",
+    "how to make soup",
+    "best soup recipes",
+    "soup cooking tips",
+    "easy soup dishes"
+]
+
+# Preprocess data
+tokenizer = tf.keras.preprocessing.text.Tokenizer()
+tokenizer.fit_on_texts(queries)
+sequences = tokenizer.texts_to_sequences(queries)
+data = tf.keras.preprocessing.sequence.pad_sequences(sequences, padding='post')
+
+# Define model
+vocab_size = len(tokenizer.word_index) + 1
+model = Sequential([
+    Embedding(input_dim=vocab_size, output_dim=64),
+    LSTM(128, return_sequences=True),
+    LSTM(128),
+    Dense(vocab_size, activation='softmax')
+])
+
+model.compile(optimizer='adam', loss='sparse_categorical_crossentropy')
+
+# Training data (X: all but last word, y: last word)
+X, y = data[:, :-1], data[:, -1]
+
+# Train model (increase epochs for better learning)
+model.fit(X, y, epochs=50, batch_size=4)
+
+# Predict next query
+new_query = "how to cook"
+new_seq = tokenizer.texts_to_sequences([new_query])
+new_seq_padded = tf.keras.preprocessing.sequence.pad_sequences(new_seq, maxlen=X.shape[1], padding='post')
+predicted = model.predict(new_seq_padded)
+
+# Get the predicted word
+predicted_index = np.argmax(predicted)
+if predicted_index in tokenizer.index_word:
+    predicted_word = tokenizer.index_word[predicted_index]
+    print(f"Predicted next word: {predicted_word}")
+else:
+    print("Predicted index not found in tokenizer's word index.")
+```
+```bash
+...
+...
+Epoch 45/50
+3/3 ━━━━━━━━━━━━━━━━━━━━ 0s 2ms/step - loss: 0.1719
+Epoch 46/50
+3/3 ━━━━━━━━━━━━━━━━━━━━ 0s 2ms/step - loss: 0.1675
+Epoch 47/50
+3/3 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - loss: 0.3407
+Epoch 48/50
+3/3 ━━━━━━━━━━━━━━━━━━━━ 0s 2ms/step - loss: 0.2629
+Epoch 49/50
+3/3 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - loss: 0.2647 
+Epoch 50/50
+3/3 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - loss: 0.2208 
+1/1 ━━━━━━━━━━━━━━━━━━━━ 0s 91ms/step
+Predicted next word: pasta
+```
+
+11. **Keyword Ranking Prediction**: Develop a keyword ranking predictor using machine
+learning models like gradient boosting machines (GBMs) or xGaussian processes to predict the
+likelihood of a given keyword appearing at the top of search engine results pages.
+## AI SEO Services:
+
+1. **Knowledge Graph Construction**: Building knowledge graphs that represent complex
+relationships between entities, concepts, and attributes.
+
+```python
+import gensim
+from gensim import corpora
+from gensim.models import LdaModel
+from gensim.parsing.preprocessing import preprocess_string
+
+# Example text data
+documents = [
+    "How to cook pasta and best pasta recipes",
+    "Bread baking tips and easy bread recipes",
+    "Soup cooking tips and best soup recipes"
+]
+
+# Preprocess the text data
+texts = [preprocess_string(doc) for doc in documents]
+
+# Create a dictionary representation of the documents
+id2word = corpora.Dictionary(texts)
+
+# Create a corpus (Bag of Words representation)
+corpus = [id2word.doc2bow(text) for text in texts]
+
+# Build the LDA model
+lda_model = LdaModel(corpus=corpus, id2word=id2word, num_topics=2, random_state=42)
+
+# Print the topics
+for topic_idx, topic in enumerate(lda_model.print_topics(num_topics=2)):
+    print(f"Topic {topic_idx}: {topic}")
+
+# Extract keywords
+for idx, topic in lda_model.show_topics(formatted=False, num_topics=2):
+    print(f"Topic {idx}:")
+    for word, weight in topic:
+        print(f" {word}: {weight}")
+
+```
+
+```bash
+Topic 0: (0, '0.140*"recip" + 0.140*"soup" + 0.137*"tip" + 0.132*"bread" + 0.114*"best" + 0.108*"cook" + 0.083*"bake" + 0.078*"easi" + 0.068*"pasta"')
+Topic 1: (1, '0.182*"pasta" + 0.173*"recip" + 0.126*"cook" + 0.117*"best" + 0.093*"bread" + 0.086*"tip" + 0.081*"soup" + 0.075*"easi" + 0.068*"bake"')
+Topic 0:
+ recip: 0.14024780690670013
+ soup: 0.14009582996368408
+ tip: 0.13667701184749603
+ bread: 0.13188967108726501
+ best: 0.11419231444597244
+ cook: 0.10770779103040695
+ bake: 0.08334696292877197
+ easi: 0.07829634845256805
+ pasta: 0.06754627078771591
+Topic 1:
+ pasta: 0.18163330852985382
+ recip: 0.17267774045467377
+ cook: 0.1260157823562622
+ best: 0.11703573912382126
+ bread: 0.09252769500017166
+ tip: 0.08589794486761093
+ soup: 0.08116340637207031
+ easi: 0.07502134889364243
+ bake: 0.0680270791053772
+```
+
+2. **AI and Machine Learning Integration AI Content Generation:**: Utilizing AI tools for content creation and optimization. 
+- e.g. NMF module from scikit-learn:
+```python
+data = pd.read_csv('your_data.csv')
+
+# Split data into training and testing sets
+X_train, X_test = train_test_split(data, test_size=0.2)
+
+# Create an instance of the NMF class
+nmf = NMF(n_components=3)
+
+# Fit the model to the training data
+nmf.fit(X_train)
+
+# Predict topics for the test data
+topics = nmf.transform(X_test)
+```
+3. **Conversational AI**: Developing conversational AI models that can understand natural
+language inputs and generate responses.
+4. **Intent Detection**: Detecting user intent behind search queries or voice commands using machine learning and NLP techniques.
+5. **Predictive SEO**: Using machine learning to predict and adapt to search trends.
+- e.g. pre-trained BERT model:
+```python
+import pandas as pd
+from transformers import BertTokenizer, BertModel
+
+# Load your dataset
+data = pd.read_csv('your_data.csv')
+
+# Create a Bert tokenizer
+tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
+
+# Create a Bert model
+model = BertModel.from_pretrained('bert-base-uncased')
+
+# Fine-tune the model on your specific task
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+model.to(device)
+loss_fn = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+
+for epoch in range(5):
+    for batch in data:
+        input_ids, attention_mask = batch['input_ids'], batch['attention_mask']
+        labels = batch['labels']
+
+        optimizer.zero_grad()
+
+        outputs = model(input_ids, attention_mask)
+        loss = loss_fn(outputs, labels)
+        loss.backward()
+        optimizer.step()
+
+    print(f"Epoch {epoch}: Loss={loss.item():.4f}")
+
+```
+6. **Conversational Search Optimization**: Structuring content to align with conversational search queries, which are becoming more common with voice search and AI chatbots.
+7. **Voice Search Optimization Natural Language Processing**: Creating content that aligns with natural language queries used in voice search. 
+8. **Long-Tail Keyword Integration**: Incorporating long-tail keywords that match conversational search patterns. 

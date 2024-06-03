@@ -1,0 +1,28 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+
+---
+
+<MainLayout title='Art'>
+    <div
+        class='flex flex-col items-start justify-center max-w-2xl mx-auto mb-16'
+    >
+        <h1
+            class='mb-4 text-3xl font-bold tracking-tight text-purple-500 dark:text-purple-400 md:text-5xl
+            transition:name='heading'
+        >
+            Art
+        </h1>
+        <p class='mb-8 text-gray-600 dark:text-gray-400'>
+            {
+                `I just rebuilt my website so new art, more posts, and some of my science fiction writing is coming soon...`
+            }
+        </p>
+        <a
+        href='/'
+        class='p-1 sm:p-4 w-64 font-bold mx-auto bg-gray-200 dark:bg-gray-800 text-center rounded-md text-black dark:text-white'
+    >
+        Return Home
+    </a>
+    </div>
+</MainLayout>
